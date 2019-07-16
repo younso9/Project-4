@@ -34,12 +34,12 @@ class Game {
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
 
-      // Reset Crowns                                       //resets crowns from previous play
+                                                          //resets crowns from previous play
         let $crown = $("#scoreboard li img");
         $crown.attr("src", "images/crown.png");
         $crown.attr("alt", "Crown Icon");
         $crown.removeClass("lost");
-      //  $crown.addClass("tries");
+      
         $crown.show();
         this.missed = 0;
     }

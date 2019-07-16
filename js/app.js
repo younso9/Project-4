@@ -20,7 +20,7 @@ $("#btn__reset").on("click", function () {
 
 $('#qwerty .key').on('click', function (event) {
     game.handleInteraction(event)
-    console.log("Juan");
+
 });
 
 if (Event.className === 'key') {
