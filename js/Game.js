@@ -12,43 +12,45 @@ Project 4 - OOP Game App
 
 
 class Game {
- totalMissed = 5;
-    constructor() {                                                 
+    totalMissed = 5;
+    constructor() {
         this.missed = 0;
         this.phrase = [                                     //array of phrases to be used within the game.
-                new Phrase('Flawsome'),
-                new Phrase('Shevolution'),
-                new Phrase('Unapologetic'),
-                new Phrase('Unicorn'),
-                new Phrase('Youniversity')
+            new Phrase('Flawsome'),
+            new Phrase('Shevolution'),
+            new Phrase('Unapologetic'),
+            new Phrase('Unicorn'),
+            new Phrase('Youniversity')
         ];
         this.activePhrase = null;                           //sets iniatial phrase to "null".
     }
 
     startGame() {                                           //method used to start game
-        $('#overlay').fadeOut(2000);                        //fades out overlay
+        $('#overlay').fadeOut(2000);
+        $('#overlay').removeClass('win');
+        $('#overlay').removeClass('lose');                  //fades out overlay
         $("#qwerty .key").prop('disabled', false);          //resets keyboard
         $("#qwerty .key").removeClass('chosen');
         $("#qwerty .key").removeClass('wrong');
-        
+
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
 
-                                                          //resets crowns from previous play
+        //resets crowns from previous play
         let $crown = $("#scoreboard li img");
         $crown.attr("src", "images/crown.png");
         $crown.attr("alt", "Crown Icon");
         $crown.removeClass("lost");
-      
+
         $crown.show();
         this.missed = 0;
     }
-    
+
     getRandomPhrase() {                                     //gets a random number from the phrase within the phrase array
         let newPhrase = Math.floor(Math.random() * this.phrase.length);
         return (this.phrase[newPhrase]);
     }
-    
+
     handleInteraction(e) {                                  //handles onscreen keyboard button clicks
 
 
@@ -69,10 +71,10 @@ class Game {
 
     removeLife() {                                          //Removes a crown from the scoreboard if missed & replace with tilted crown
         this.missed = this.missed + 1;
-        const tiltcrown= "images/tiltcrown.png";
+        const tiltcrown = "images/tiltcrown.png";
 
         const $lives = $("#scoreboard li");
-        let $removeLife = $lives.eq(this.missed -1);
+        let $removeLife = $lives.eq(this.missed - 1);
         let $replaceIMG = $removeLife.children().first();
         $replaceIMG.attr("src", tiltcrown);
         $replaceIMG.attr("alt", " Tilted Crown");
