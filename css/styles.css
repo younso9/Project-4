@@ -21,6 +21,7 @@
 * {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  background-position: center;
 }
 
 body {
@@ -44,15 +45,16 @@ h2 {
 
 h1 {
   font-size: 30px;
+ 
 }
 
 button {
   margin: 6px;
   border: 1px solid transparent;
   padding: .5rem 1rem;
-  color: var(--color-keys);
+  color: whitesmoke;
   font-size: var(--font-size-medium);
-  background-color: var(--color-keys-light);
+  background-color: #a26778;
   border-radius: 5px;
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
@@ -72,6 +74,11 @@ button {
   height: 100%;
   max-height: 900px;
   text-align: center;
+  background-image: linear-gradient(rgb(255, 255, 255), transparent 20%),
+  linear-gradient(0deg,#fff, transparent 20%), url('../images/morning.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .section {
@@ -86,7 +93,7 @@ button {
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color: #7a364a;
 }
 
 
@@ -99,7 +106,7 @@ button {
   padding: 20px 1px 0 1px;
   margin-right: 2px;
   color: transparent;
-  background: var(--color-neutral-light);
+  background: #a26778;
   border-radius: 5px;
 }
 
@@ -180,23 +187,30 @@ button {
 }
 
 .start {
-  background-color: #3a3f58;
+  background-image: url(../images/pink-ocean.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .start a {
   color: #fff;
+  
 }
 
 .win {
-  background-color: var(--color-win);
+  background-color: pink;
 }
 
 .win a {
-  color: var(--color-win);
+  color: purple;
 }
 
 .lose {
-  background-color: #f5785f;
+  background-color: #b87b89;
+  background-image: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), url(../images/saduni.jpg);
+  background-position: center;
+  background-size: cover;
 }
 
 .lose a {

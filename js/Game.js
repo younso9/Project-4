@@ -1,248 +1,109 @@
 /**************************
+Sonya Youngblood
+"Doll Boss Hunter"
+
 Treehouse FSJS Techdegree
-Project 4 - OOP Game App 
-Game.js Comments
+Project 4 - OOP Game App
 ***************************/
+
+// Initializing a class definition
+// Game Class created for starting and ending the game, handling interaction, getting a random phrase,
+// checking for a win and removing a life from the scoreboard.
 
 
 class Game {
-    // Initializing a class definition
-    // Created a Game Class  for starting and ending the game, handling interaction, getting a random phrase,
-    // checking for a win and rmoving a life from the scoreboard.
-    /*class Hero {
-    constructor(name, level) {
-        this.name = name;
-        this.level = level;
-    }
-    } */
-    // Track the number of missed guesses that is initially set to 0
-    // Stored my array of phrases to be used within the game.  
-
-    missedGuess = 5;
-
-    constructor() {
+ totalMissed = 5;
+    constructor() {                                                 
         this.missed = 0;
-        this.phrase =
-            [
+        this.phrase = [                                     //array of phrases to be used within the game.
                 new Phrase('Flawsome'),
                 new Phrase('Shevolution'),
-                new Phrase('Unaplolgetic'),
-                new Phrase('Dollboss'),
+                new Phrase('Unapologetic'),
+                new Phrase('Unicorn'),
                 new Phrase('Youniversity')
-            ];
-
-        this.activePhrase = null;
+        ];
+        this.activePhrase = null;                           //sets iniatial phrase to "null".
     }
 
-    startGame() {
-        // METHOD THAT INITIALIZES GAME
-        // Overlay disappears and game screen appears
-        // Previous lives reset
-        // Previous keyboard reset
-        // Random phrase is retrieved (getRandomPhrase())
-        // Phrase is displayed with objects hidden (addPhraseToDisplay())
-
-        $('#overlay').fadeOut(4000);
-        $('#qwerty .key').prop('disabled', false);
-        $('#qwerty .key').removeClass('chosenLetter');
-        $('#qwerty .key').removeClass('wrong');
-
+    startGame() {                                           //method used to start game
+        $('#overlay').fadeOut(2000);                        //fades out overlay
+        $("#qwerty .key").prop('disabled', false);          //resets keyboard
+        $("#qwerty .key").removeClass('chosen');
+        $("#qwerty .key").removeClass('wrong');
+        
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
 
+      // Reset Crowns                                       //resets crowns from previous play
         let $crown = $("#scoreboard li img");
-        $crown.attr("src", "images/crown.jpg");
-        $crown.attr("alt", "Crown");
+        $crown.attr("src", "images/crown.png");
+        $crown.attr("alt", "Crown Icon");
+        $crown.removeClass("lost");
+      //  $crown.addClass("tries");
         $crown.show();
         this.missed = 0;
     }
-
-
-
-
-
-    getRandomPhrase() {
-        // METHOD THAT SELECTS A RANDOM PHRASE 
-        // get a random number
-        // use the random to select phrase from the array of phrases
-        // return the chosen phrase
-
-
-        const newPhrase = Math.floor(Math.random() * this.phrase.length);
+    
+    getRandomPhrase() {                                     //gets a random number from the phrase within the phrase array
+        let newPhrase = Math.floor(Math.random() * this.phrase.length);
         return (this.phrase[newPhrase]);
-
     }
-}
-// handleInteraction(e) {
-
-//         let $letter = $(e.target).text();
-//         $(e.target).prop('disabled', true);
-
-//         if (this.activePhrase.checkLetter($letter)) {
-//             this.activePhrase.showMatchedLetter($letter);
-//             $(e.target).addClass('chosen');
-  
-//         } else {
-//             this.removeLife();
-//             $(e.target).addClass('wrong');
-//         }
-
-//         if (this.checkForWin()) {
-//             this.gameOver();
-//     };
-
-
-//         // METHOD THAT CONTROLS MOST OF THE GAME LOGIC
-//         // checks for the letter in the chosen phrase via the checkLetter method in Phrase.js
-//         // If user clicks on screen keyboard...
-//         // Store the value of what the user cliked
-
-//         // Disable whichever letter the user chose (Can't be chosen again)
-
-//         // If the chosen letter matches a letter in the phrase (checkLetter())...
-//         // Give it the "chosen" class (Highlights the letter in whatever color you choose... Css or JS)
-//         // Show the matched letter: Un-hides the letter object (showMatchedLetter())
-//         // If the user has won (checkForWin()) ...
-//         // Ends game (gameOver())
-
-//         // Otherwise/else (letter does NOT match)...
-//         // Give it the "wrong" class (Highlights the letter in whatever color you choose... Css or JS)
-//         // Remove 1 life
-
-
-//     };
-
-//     removeLife() {
-//         // METHOD THAT REMOVES LIFE FROM SCOREBOARD WHEN CALLED
-//         // Storing all the "lives" (The crown icons)
-//         // Points to which crown based on how many misses 
-//         // Remove a crown image replace with tilted "lost" crown image
-//         // Missed guesses is incremented by 1
-//         // If missed guesses is the maximum amount...
-//         // Ends game(gameOver())
-
-//         this.missed = this.missed + 1;
-//         const lostCrown = 'images/tiltcrown.jpg';
-
-//         const $crowns = $ ('#scoreboard li:not (.lost)').last();
-//         const $crownsImg = $crowns.find('img');
-//         $crownsImg.attr('src', tiltCrown);
-//         $crowns.addClass('lost');
-            
-//         if (this.missed === 5) {
-//             this.gameOver(false)
-//         }    
-
-//   };            
-        
-
-// /*
-//         let $removeCrown = $crowns.eq(this.missed);
-
-//         let $replaceIMG = $removeCrown.children().first();
-//         $replaceIMG.attr("src", tiltCrown);
-//         $replaceIMG.attr("alt", "Tilted Crown");
-//         $replaceIMG.removeClass("tries");
-//         $replaceIMG.addClass("lost");
-
-// */        
-        
-  
-
-// checkForWin() {
-//     // METHOD THAT CHECKS IF USER HAS WON
-//     // Check if there are no more hidden letters in the phrase object, return true or false
-            
-//     if ($('.hide').length > 0) {
-//         return false;
-//     } else {
-//         return true;
-//     }
-//  }
-       
-// gameOver() {
     
-//     // METHOD THAT ENDS GAME AND DISPLAYS A MESSAGE ON WHETHER USER WINS OR LOSES
-//     // Leaves game screen and goes back to overlay
-//     // If user has max misses, they lose and...
-//     //Display losing message
-//     // Gives overlay losing class name and styles
-//     // Otherwise/else...
-//     // Display winning message
-//     // Gives overlay winning class name and styles (Star Wars Victory pic)
-
-//     const $startScreen = $('#overlay');
-//     $startScreen.show();
-
-//     if (this.checkForWin()) {
-//         $('#game-over- message').text("You're A DollBoss!");
-//         $startScreen.removeClass = ('start');
-//         $startScreen.addClass('win');
-//     } else {
-//         $('#game-over- message').text(`Ooopsies! You Almost Doll Boss'd! "${this.activePhrase.phrase}" Gets the Crown!`);
-//         $startScreen.removeClass ('start');
-//         $startScreen.addClass('lose');
-//     }
-
-//     }
-
-// }        
-
- /* 
-
-            new Phrase('Believe in You'),
-            new Phrase('Happily You'),
-            new Phrase('Change Your Narrative'),
-            new Phrase('The Doll Boss'),
-            new Phrase('You are awesome')
+    handleInteraction(e) {                                  //handles onscreen keyboard button clicks
 
 
-
-
-
-    this.resetGame(); 
-    const showCount = document.querySelectorAll('.show').length;
-    
-  $('#game-over-message');
-            let resetButton = document.querySelector('#btn_reset');
-            let overlay = document.querySelector('#overlay');
-            overylay.style.display = '';
-
-        const $removeCrown = $removeCrown.children().first();
-        let
-        const tiltCrown
-
-    document.getElementsByClassName('tries')[0].remove();
-        console.log(letterInPhrase);
-
-        if (letterInPhrase) {
-            this.activePhrase.showMatchedLetter(letter);
-
-            this.checkForWin();
+        let $letter = $(e.target).text();
+        $(e.target).prop('disabled', true);                 //will disable chosen letters
+        if (this.activePhrase.checkLetter($letter)) {
+            this.activePhrase.showMatchedLetter($letter);
+            $(e.target).addClass('chosen');
 
         } else {
-
-            if (event instanceof KeyboardEvent) {
-
-                const buttonElements = document.querySelectorAll('.key');
-                let targetLetter;
-
-                for (let i = 0; i < buttonElements.length; i++) {
-
-                    if buttonElements[i].textContent === letter) {
-                        targetLetter = buttonElements[i];
-                    }
-
-                }
-                targetLetter.classList.add('wrong');
-
-            } else {
-                event.target.classList.add('wrong');
-            }
-
-            this.removeLife();
+            this.removeLife();                              //will remove a life if chosen letter is not within the phrase
+            $(e.target).addClass('wrong');
         }
+        if (this.checkForWin()) {                           //check if player has won the game, show win screen
+            this.gameOver();
+        }
+    };
 
+    removeLife() {                                          //Removes a crown from the scoreboard if missed & replace with tilted crown
+        this.missed = this.missed + 1;
+        const tiltcrown= "images/tiltcrown.png";
+
+        const $lives = $("#scoreboard li");
+        let $removeLife = $lives.eq(this.missed -1);
+        let $replaceIMG = $removeLife.children().first();
+        $replaceIMG.attr("src", tiltcrown);
+        $replaceIMG.attr("alt", " Tilted Crown");
+        $replaceIMG.removeClass("tries");
+        $replaceIMG.addClass("lost");
+
+
+        if (this.missed >= 5) {
+            this.gameOver(false);
+        }
+    };
+
+    checkForWin() {                                     //check for letter in phrase if tue show on screen, if false remove crown
+        if ($('.hide').length > 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-*/
+    gameOver() {                                        //Displays a win or loss screen win the game is over
+        const $startScreen = $('#overlay');
+        $startScreen.show();
+        if (this.checkForWin()) {
+            $('#game-over-message').text("Congratulations! You're A DollBoss!");
+            $startScreen.removeClass('start');
+            $startScreen.addClass('win');
+        } else {
+            $('#game-over-message').text(`Sorry, try again. The correct phrase was "${this.activePhrase.phrase}".`);
+            $startScreen.removeClass('start');
+            $startScreen.addClass('lose');
+        }
+    }
+}
