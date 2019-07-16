@@ -173,7 +173,7 @@ button {
   display: flex;
   flex-direction: column;
   position: fixed;
-  color: #FFFFFF;
+  color: #fffdfd;
   justify-content: center;
   top: 0;
   bottom: 0;
@@ -183,7 +183,7 @@ button {
 }
 
 .title {
-  color: #FFF;
+  color: #724451;
 }
 
 .start {
@@ -199,6 +199,10 @@ button {
 }
 
 .win {
+  background-image: url(../images/largecrown.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-color: pink;
 }
 
